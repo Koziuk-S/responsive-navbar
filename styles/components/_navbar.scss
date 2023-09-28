@@ -1,0 +1,204 @@
+@use "../common";
+
+$navbar-height: 68px;
+$nav-border: 1px solid rgba(95, 95, 95, 0.2);
+
+.navbar {
+  @extend .flex-align-center;
+
+  justify-content: space-between;
+  position: relative;
+  padding: 0 16px;
+  height: $navbar-height;
+  border-bottom: $nav-border;
+  background-color: #fff;
+
+  &-left-side {
+    @extend .flex-align-center;
+
+    height: 100%;
+  }
+
+  &-collapse-btn {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border: 1px solid rgba(85, 85, 85, 0.5);
+    border-radius: 4px;
+    cursor: pointer;
+    transition: 0.3s;
+
+    &:hover {
+      background-color: rgba(95, 95, 95, 0.1);
+    }
+  }
+
+  &-collapse-icon,
+  &-collapse-icon::before,
+  &-collapse-icon::after {
+    display: block;
+    height: 2px;
+    width: 18px;
+    background-color: #3f3f3f;
+  }
+
+  &-collapse-icon {
+    position: relative;
+    margin: 6px 0;
+
+    .open > & {
+      background-color: transparent;
+    }
+
+    &::before,
+    &::after {
+      content: "";
+      position: absolute;
+
+      .open > & {
+        transform: rotate(0deg);
+      }
+    }
+
+    &::before {
+      top: -6px;
+
+      .open > & {
+        top: 0;
+        animation: collapse-icon-before 0.2s linear forwards;
+      }
+    }
+
+    &::after {
+      bottom: -6px;
+
+      .open > & {
+        bottom: 0;
+        animation: collapse-icon-after 0.2s linear forwards;
+      }
+    }
+  }
+
+  &-collapse-content {
+    &.visible {
+      display: flex;
+    }
+  }
+
+  &-list {
+    @extend .flex-align-center;
+
+    gap: 16px;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  &-item {
+    height: 100%;
+  }
+
+  &-link {
+    @extend .flex-align-center;
+
+    position: relative;
+    height: 100%;
+    text-decoration: none;
+    color: #3f3f3f;
+    transition: color 0.3s;
+
+    &:hover {
+      color: #1d8be6;
+    }
+
+    &::after {
+      content: "";
+      position: absolute;
+      width: 100%;
+      height: 2px;
+      bottom: 0;
+    }
+
+    &.active {
+      color: #1d8be6;
+
+      &::after {
+        background-color: #1d8be6;
+      }
+    }
+  }
+}
+
+.but-login {
+  padding: 8px 16px;
+  border: 1px solid rgba(85, 85, 85, 0.5);
+  border-radius: 4px;
+  background-color: transparent;
+  color: #3f3f3f;
+  cursor: pointer;
+  transition: 0.3s;
+
+  &:hover {
+    background-color: rgba(95, 95, 95, 0.1);
+  }
+}
+
+@media (max-width: 550px) {
+  .navbar {
+    &-collapse-btn {
+      display: flex;
+    }
+
+    &-collapse-content {
+      display: none;
+    }
+
+    &-list {
+      flex-direction: column;
+      align-items: start;
+      position: absolute;
+      width: 100%;
+      height: auto;
+      top: $navbar-height;
+      left: 0;
+      padding: 16px;
+      border-bottom: $nav-border;
+      background-color: #fff;
+    }
+
+    &-link.active::after {
+      background-color: transparent;
+    }
+  }
+}
+
+@keyframes collapse-icon-before {
+  0% {
+    top: -6px;
+  }
+  50% {
+    top: 0px;
+    transform: rotate(0deg);
+  }
+  100% {
+    top: 0px;
+    transform: rotate(45deg);
+  }
+}
+
+@keyframes collapse-icon-after {
+  0% {
+    bottom: -6px;
+  }
+  50% {
+    bottom: 0px;
+    transform: rotate(0deg);
+  }
+  100% {
+    bottom: 0px;
+    transform: rotate(-45deg);
+  }
+}

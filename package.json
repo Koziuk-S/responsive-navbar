@@ -1,0 +1,17 @@
+{
+  "name": "responsive-navbar",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "sass-dev": "npm run sass-build && sass ./styles:./css --watch --update",
+    "sass-build": "sass ./styles:./css --style=expanded",
+    "sass-build:prod": "sass ./styles:./css --style=compressed --no-source-map"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "node-sass": "^9.0.0",
+    "sass": "^1.68.0"
+  }
+}
